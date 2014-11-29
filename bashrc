@@ -6,7 +6,7 @@ export CLICOLOR=1
 export WINEDEBUG="-all"
 export PS1="[\u@\h \${?}]:$ "
 
-eval `gdircolors ~/Dropbox/Projects/dircolors-solarized/dircolors.256dark`
+eval `gdircolors ~/.dircolors`
 
 alias ls="gls --color"
 alias xargs="gxargs"
