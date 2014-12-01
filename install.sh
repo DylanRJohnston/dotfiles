@@ -22,6 +22,7 @@ for file in $(ls -1 "${DIR}" | grep -Ev "$(cat "${DIR}/.ignore" | paste -sd \| -
     #TODO recursively merge directories like .ssh to not override keys
     if [[ -d "${HOME}/.${file}" ]]; then
         error "Cannot merge directory ${file}, please remove and/or manually merge"
+        continue
     fi
 
     ln -sf "${DIR}/${file}" "${HOME}/.${file}"
