@@ -9,7 +9,7 @@ DIR="$(cd "$(dirname "$0")"; pwd)"
 function error()
 {
     #ANSI escape codes 5 blinking, 37 white text, 41 red background, 0 nothing.
-    printf "\e[5;37;41mError\e[0;37;41m: $@ \n\e[0m"
+    printf "\e[5;37;41mError\e[0;37;41m: $@ \e[0m\n"
 }
 
 if [[ -z "${HOME}" ]]; then
