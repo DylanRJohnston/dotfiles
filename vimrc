@@ -69,6 +69,10 @@ set hlsearch
 set nohidden
 highlight MatchParen ctermbg=4
 
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
+
 "}}}
 
 "{{{Look and Feel
