@@ -1,3 +1,5 @@
 [user]
 	name = Dylan R. Johnston
 	email = Dylan.R.Johnston@gmail.com
+[push]
+	default = simple
