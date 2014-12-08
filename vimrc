@@ -60,7 +60,6 @@ set formatoptions+=1
 set textwidth=0
 set backspace=indent,eol,start
 
-set mouse=a
 set number
 set ignorecase
 set smartcase
