@@ -20,6 +20,11 @@ alias fleetctl-destroy-all-units='fleetctl destroy $(fleetctl list-units -fields
 alias fleetctl-destroy-all-unit-files='fleetctl destroy $(fleetctl list-unit-files -fields=unit -no-legend)'
 alias lsearch="ldapsearch -o ldif-wrap=no -xZZ"
 
+if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(awk 'BEGIN { FS = ":" }; {print $2}' < "${HOME}/.gpg-agent-info")"; then
+    export "$(cat "${HOME}/.gpg-agent-info")"
+else
+    eval "$(/usr/local/bin/gpg-agent --daemon --write-env-file)"
+fi
 
 function free() {
     vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
