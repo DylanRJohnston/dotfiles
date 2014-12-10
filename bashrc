@@ -20,7 +20,7 @@ alias fleetctl-destroy-all-units='fleetctl destroy $(fleetctl list-units -fields
 alias fleetctl-destroy-all-unit-files='fleetctl destroy $(fleetctl list-unit-files -fields=unit -no-legend)'
 alias lsearch="ldapsearch -o ldif-wrap=no -xZZ"
 
-if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(awk 'BEGIN { FS = ":" }; {print $2}' < "${HOME}/.gpg-agent-info")"; then
+if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(awk 'BEGIN { FS = ":" }; {print $2}' < "${HOME}/.gpg-agent-info")" &>/dev/null; then
     export "$(cat "${HOME}/.gpg-agent-info")"
 else
     eval "$(/usr/local/bin/gpg-agent --daemon --write-env-file)"
@@ -51,4 +51,10 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-##REKT
+#if [[ -z "${TMUX}" ]]; then
+#    if ! tmux list-sessions &>/dev/null; then
+#        exec tmux
+#    else
+#        tmux attach
+#    fi
+#fi
