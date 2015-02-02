@@ -51,11 +51,3 @@ function jobInfo() {
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
-
-if [[ -z "${TMUX}" ]]; then
-    if ! tmux list-sessions &>/dev/null; then
-        tmux
-    else
-        tmux attach
-    fi
-fi
