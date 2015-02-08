@@ -1,11 +1,7 @@
-"{{{Auto Commands
-"Automactially cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
-"Remove any trailing whitespace
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
-"Restore cursor to where it was before
 augroup JumpCursorOnEdit
    au!
    autocmd BufReadPost *
@@ -20,7 +16,6 @@ augroup JumpCursorOnEdit
             \     exe JumpCursorOnEdit_foo |
             \   endif |
             \ endif
-" Need to postpone using "zv" until after reading the modelines.
    autocmd BufWinEnter *
             \ if exists("b:doopenfold") |
             \   exe "normal zv" |
@@ -30,9 +25,8 @@ augroup JumpCursorOnEdit
             \   unlet b:doopenfold |
             \ endif
 augroup END
-"}}}
 
-"{{{Misc Settings
+
 set nocompatible
 set showcmd
 set foldmethod=marker
@@ -72,10 +66,6 @@ set backup
 set backupdir=~/.vim/backup
 set directory=~/.vim/tmp
 
-"}}}
-
-"{{{Look and Feel
-
 syntax enable
 set background=dark
 set grepprg=grep\ -nH\ $*
@@ -83,7 +73,7 @@ colorscheme solarized
 
 set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
-
-"}}}
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 
 command W w !sudo tee % > /dev/null
+
