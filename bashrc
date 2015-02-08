@@ -19,6 +19,7 @@ alias v="vagrant"
 alias fleetctl-destroy-all-units='fleetctl destroy $(fleetctl list-units -fields=unit -no-legend)'
 alias fleetctl-destroy-all-unit-files='fleetctl destroy $(fleetctl list-unit-files -fields=unit -no-legend)'
 alias lsearch="ldapsearch -o ldif-wrap=no -xZZ"
+alias cast="DEBUG=castnow* castnow --address=192.168.0.21"
 
 if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(awk 'BEGIN { FS = ":" }; {print $2}' < "${HOME}/.gpg-agent-info")" &>/dev/null; then
     export "$(cat "${HOME}/.gpg-agent-info")"
