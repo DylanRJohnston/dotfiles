@@ -27,9 +27,30 @@ case $OS in
     "Linux" )
         eval "$(dircolors ~/.dircolors)"
 
-        function jobInfo() {
-            sacct --format=JobID,JobName,Partition,NodeList,State,ExitCode,Elapsed,CPUTime,AllocCPUS -j $@
-        }
+        case $(hostname -i) in
+            172.16.* )
+                ##At Work
+                export PATH="$PATH:/d/sw/bin"
+                export MODULE_VERSION=3.2.7
+                export DUGEO_SOFTWARE="/d/sw"
+
+                source "$DUGEO_SOFTWARE/Modules/$MODULE_VERSION/init/bash"
+                umask 0002
+
+                module add intel-rt/2015.0.090
+                module add intel-composer/2015.0.090
+                module add libcurl
+                module add glib2
+                module add openmpi
+                module add dugio
+                module add java64
+                module add openssl
+
+                function jobInfo() {
+                    sacct --format=JobID,JobName,Partition,NodeList,State,ExitCode,Elapsed,CPUTime,AllocCPUS -j $@
+                }
+            ;;
+        esac
     ;;
 esac
 
