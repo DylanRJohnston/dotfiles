@@ -1,5 +1,10 @@
 [user]
-	name = Dylan R. Johnston
-	email = Dylan.R.Johnston@gmail.com
+    name = Dylan R. Johnston
+    email = Dylan.R.Johnston@gmail.com
 [push]
-	default = simple
+    default = current
+[color]
+	ui = auto
+	diff = auto
+[alias]
+	wdiff = diff --color-words
