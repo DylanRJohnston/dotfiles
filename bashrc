@@ -1,38 +1,43 @@
 #!/bin/bash
 
-UNAME="$(uname)"
-if [[ $UNAME == "darwin" ]]; then
-    export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
-    alias dircolors="gdircolors"
-    alias ls="gls --color"
-    alias xargs="gxargs"
+OS="$(uname)"
+case $OS in
+    "Darwin" )
+        export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
+        alias ls="gls --color"
+        alias xargs="gxargs"
 
-    if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(awk 'BEGIN { FS = ":" }; {print $2}' < "${HOME}/.gpg-agent-info")" &>/dev/null; then
-        export "$(cat "${HOME}/.gpg-agent-info")"
-    else
-        eval "$(/usr/local/bin/gpg-agent --daemon --write-env-file)"
-    fi
+        eval "$(gdircolors ~/.dircolors)"
 
-    function free() {
-        vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
-    }
+        if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(awk 'BEGIN { FS = ":" }; {print $2}' < "${HOME}/.gpg-agent-info")" &>/dev/null; then
+            export "$(cat "${HOME}/.gpg-agent-info")"
+        else
+            eval "$(/usr/local/bin/gpg-agent --daemon --write-env-file)"
+        fi
 
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-    fi
-elif [[ $UNAME == "Linux" ]]; then
-    function jobInfo() {
-        sacct --format=JobID,JobName,Partition,NodeList,State,ExitCode,Elapsed,CPUTime,AllocCPUS -j $@
-    }
-fi
+        function free() {
+            vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
+        }
+
+        if [ -f $(brew --prefix)/etc/bash_completion ]; then
+            . $(brew --prefix)/etc/bash_completion
+        fi
+    ;;
+
+    "Linux" )
+        eval "$(dircolors ~/.dircolors)"
+
+        function jobInfo() {
+            sacct --format=JobID,JobName,Partition,NodeList,State,ExitCode,Elapsed,CPUTime,AllocCPUS -j $@
+        }
+    ;;
+esac
 
 export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no"
 export CLICOLOR=1
 export WINEDEBUG="-all"
 export PS1="[\u@\h \${?}]:$ "
 export FLEETCTL_TUNNEL=172.17.8.101
-
-eval "$(dircolors ~/.dircolors)"
 
 alias sl="ls"
 alias ll="ls -l"
