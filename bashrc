@@ -69,7 +69,6 @@ alias htop="TERM=screen htop"
 alias v="vagrant"
 alias fleetctl-destroy-all-units='fleetctl destroy $(fleetctl list-units -fields=unit -no-legend)'
 alias fleetctl-destroy-all-unit-files='fleetctl destroy $(fleetctl list-unit-files -fields=unit -no-legend)'
-alias lsearch="ldapsearch -o ldif-wrap=no -xZZ"
 alias cast="DEBUG=castnow* castnow --address=192.168.0.21"
 
 function man() {
@@ -81,4 +80,33 @@ function man() {
     LESS_TERMCAP_ue=$'\E[0m' \
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
+}
+
+function lsearch()
+{
+    #Created with `gpg2 --batch --encrypt --armor --recipient %gpg_key_id% <<< "-D %binddn% -w %password%"`
+    LDAP_BIND_DN_AND_PW=$(
+        2>/dev/null gpg2 --batch --decrypt <<EOL
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v2
+
+hQIMAzM1XH36g+InAQ/5AWB5/iHyjjE5oiw7niW4kYsMnQadzMbvttTQoTWNsLlb
+F3APJXPvCyil09aqeWlp63n5uJlxOpGveEWi4s2o+q3XYcOBgHqpkSeYldiPVCfI
+DfiuGRAoMBDYdfMyBSwFswSOTjB6dGwQldfMuIaxLv0Du85J7+YobAG9tvTQaT7D
+1EifjwCCXWYazREw0Yb7Es/1TUTf/tVrfxwo1GHa6mhpcDG0/eqIntmOEFaPtAVk
+Ddtdg5CF70jhhl2orECkUk8Dz5CYCBJsYoVAoCkM9AD764oXBIjVdoe8Hrou0+W0
+AEDRs5UAcfDRtOLEKYjbRZvZ1fcjgcbKm3VOH+Nrk5E1Tc03Rc5bnt67KDBV9ijP
+li18ToV5T6TGuEUyoNkTjCrkcs2LXaMVodD41KLX3SmBOz7XraEpdIqvOx5j6Ncs
+NNYkK3qptiFe0uVWvOGnfuMXq7vJOzdzdm65uQjsVGlDZYRO80bvn5VOUB44vdRh
+EN6+ucuxPTbYub6cWSM3yaOXOE9rEocGwnL1iIDLtzuT+g6PgPu61L1F5Y6NXVuG
+OCX40wgiZaetSrFdVotFrBqmrymFrpxGBmKm32fkg3W6XrG4On2mfTAO/eucRmys
+rM/56sEsE9n1+9QZWnbcq5wOFNCYF3rsVgaTSe1geP+9vgVg2Wvj2HUHdcHvJfLS
+ZAEg3SyQDh8AdxeZSQpYawaXrpFW9l9GLMm2H8QpGfCtx83UoRYOmsz3OZ072Eja
+X3B7ow2rfaN99Tgif/5uxfJL60tWC47kB1wQmILSXZ4QrrFjFNKag582MQrPnxAq
+sYpQbe4=
+=h0Xt
+-----END PGP MESSAGE-----
+EOL)
+
+    ldapsearch -o ldif-wrap=no -xLLLZZ ${LDAP_BIND_DN_AND_PW} ${@}
 }
