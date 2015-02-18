@@ -47,6 +47,7 @@ case $OS in
                 module add openssl
 
                 module add slurm
+                module add git
 
                 function jobInfo() {
                     sacct --format=JobID,JobName,Partition,NodeList,State,ExitCode,Elapsed,CPUTime,AllocCPUS -j $@
