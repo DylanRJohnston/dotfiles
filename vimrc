@@ -29,7 +29,6 @@ augroup END
 
 set nocompatible
 set showcmd
-set foldmethod=marker
 
 filetype on
 filetype plugin on
