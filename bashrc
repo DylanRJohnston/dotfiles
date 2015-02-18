@@ -46,6 +46,8 @@ case $OS in
                 module add java64
                 module add openssl
 
+                module add slurm
+
                 function jobInfo() {
                     sacct --format=JobID,JobName,Partition,NodeList,State,ExitCode,Elapsed,CPUTime,AllocCPUS -j $@
                 }
