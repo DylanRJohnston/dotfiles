@@ -70,7 +70,7 @@ alias htop="TERM=screen htop"
 alias v="vagrant"
 alias fleetctl-destroy-all-units='fleetctl destroy $(fleetctl list-units -fields=unit -no-legend)'
 alias fleetctl-destroy-all-unit-files='fleetctl destroy $(fleetctl list-unit-files -fields=unit -no-legend)'
-alias cast="DEBUG=castnow* castnow --address=192.168.0.21"
+alias cast="DEBUG=castnow* castnow --address=TheChromiestCast"
 
 function man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
