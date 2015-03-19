@@ -46,6 +46,7 @@ case $OS in
                 module add dugio
                 module add java64
                 module add openssl
+                module add cwp.su
 
                 module add slurm
                 module add git

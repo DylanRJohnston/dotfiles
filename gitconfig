@@ -8,3 +8,5 @@
 	diff = auto
 [alias]
 	wdiff = diff --color-words
+	fh = log --graph --pretty=\"format:%Cred%h%C(yellow)%d%Creset ... %s %Cgreen(%ar by %an)%Creset\"
+	h = "!f() { TARGET=HEAD; [ -z \"${1##*[!0-9]*}\" ] && TARGET=$1 && shift; git fh $TARGET | head -${1:-10} ;}; f"
