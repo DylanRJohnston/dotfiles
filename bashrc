@@ -7,6 +7,7 @@ case $OS in
         export HOMEBREW_MAKE_JOBS="$(sysctl hw.logicalcpu)"
         alias ls="gls --color"
         alias xargs="gxargs"
+        alias mango="mongod --config /usr/local/etc/mongod.conf"
 
         eval "$(gdircolors ~/.dircolors)"
 
@@ -27,7 +28,6 @@ case $OS in
 
     "Linux" )
         eval "$(dircolors ~/.dircolors)"
-
         case $(hostname -i) in
             172.16.* )
                 ##At Work
