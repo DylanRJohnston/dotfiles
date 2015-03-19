@@ -21,7 +21,7 @@ case $OS in
         }
 
         if [ -f $(brew --prefix)/etc/bash_completion ]; then
-            . $(brew --prefix)/etc/bash_completion
+            source $(brew --prefix)/etc/bash_completion
         fi
     ;;
 
@@ -82,6 +82,13 @@ function man() {
     LESS_TERMCAP_ue=$'\E[0m' \
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
+}
+
+function sparseGitInit()
+{
+    git init
+    git config core.sparsecheckout true
+    echo $@ >> .git/info/sparse-checkout
 }
 
 function lsearch()
