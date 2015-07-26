@@ -2,7 +2,7 @@
 
 case "$(uname)" in
     "Darwin" )
-        export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
+        export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/heroku/bin"
         export HOMEBREW_MAKE_JOBS="$(sysctl hw.logicalcpu)"
         alias ls="gls --color"
         alias xargs="gxargs"
