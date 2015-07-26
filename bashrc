@@ -6,7 +6,7 @@ case "$(uname)" in
         export HOMEBREW_MAKE_JOBS="$(sysctl hw.logicalcpu)"
         alias ls="gls --color"
         alias xargs="gxargs"
-        alias mango="mongod --config /usr/local/etc/mongod.conf"
+        alias mango="mongod --setParameter textSearchEnabled=true --config /usr/local/etc/mongod.conf"
 
         eval "$(gdircolors ~/.dircolors)"
 
