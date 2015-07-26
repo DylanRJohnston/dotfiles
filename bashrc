@@ -3,7 +3,7 @@
 case "$(uname)" in
     "Darwin" )
         export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin:/usr/local/heroku/bin"
-        export HOMEBREW_MAKE_JOBS="$(sysctl hw.logicalcpu)"
+        export HOMEBREW_MAKE_JOBS="$(sysctl -n hw.logicalcpu)"
         alias ls="gls --color"
         alias xargs="gxargs"
         alias mango="mongod --setParameter textSearchEnabled=true --config /usr/local/etc/mongod.conf"
