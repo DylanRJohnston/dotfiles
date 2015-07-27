@@ -20,9 +20,10 @@ case "$(uname)" in
             vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
         }
 
-        if [ -f $(brew --prefix)/etc/bash_completion ]; then
-            source $(brew --prefix)/etc/bash_completion
+        if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+            . $(brew --prefix)/share/bash-completion/bash_completion
         fi
+
     ;;
 
     "Linux" )
