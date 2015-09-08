@@ -8,6 +8,8 @@ case "$(uname)" in
         alias xargs="gxargs"
         alias mango="mongod --setParameter textSearchEnabled=true --config /usr/local/etc/mongod.conf"
 
+        source /opt/intel/bin/iccvars.sh -arch intel64 -platform mac
+
         eval "$(gdircolors ~/.dircolors)"
 
         if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(awk 'BEGIN { FS = ":" }; {print $2}' < "${HOME}/.gpg-agent-info")" &>/dev/null; then
