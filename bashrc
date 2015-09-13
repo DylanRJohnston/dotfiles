@@ -8,7 +8,7 @@ case "$(uname)" in
         alias xargs="gxargs"
         alias mango="mongod --setParameter textSearchEnabled=true --config /usr/local/etc/mongod.conf"
 
-        source /opt/intel/bin/iccvars.sh -arch intel64 -platform mac
+        [[ -e /opt/intel/bin/iccvars.sh ]] && source /opt/intel/bin/iccvars.sh -arch intel64 -platform mac
 
         eval "$(gdircolors ~/.dircolors)"
 
