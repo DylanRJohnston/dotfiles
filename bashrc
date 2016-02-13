@@ -92,6 +92,12 @@ export HISTFILE=~/.bash_eternal_history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
+function mmongo() {
+
+eval "$(meteor mongo -U $1 | sed -E 's#.+//([^:]+):([^@]+)@(.+)#mongo -u \1 -p \2 \3#')"
+
+}
+
 function man() {
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
