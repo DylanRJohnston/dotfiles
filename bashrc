@@ -12,11 +12,18 @@ case "$(uname)" in
 
         eval "$(gdircolors ~/.dircolors)"
 
-        if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(awk 'BEGIN { FS = ":" }; {print $2}' < "${HOME}/.gpg-agent-info")" &>/dev/null; then
-            export "$(cat "${HOME}/.gpg-agent-info")"
+        if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(head -n 1 < "${HOME}/.gpg-agent-info" | awk 'BEGIN { FS = ":" }; {print $2}')" &>/dev/null; then
+            . "${HOME}/.gpg-agent-info"
+            export GPG_AGENT_INFO
+            export SSH_AUTH_SOCK
+            export SSH_AGENT_PID
         else
-            eval "$(/usr/local/bin/gpg-agent --daemon --write-env-file)"
+            eval "$(/usr/local/bin/gpg-agent)"
         fi
+
+        GPG_TTY=$(tty)
+        export GPG_TTY
+
 
         function free() {
             vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
