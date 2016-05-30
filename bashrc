@@ -152,3 +152,14 @@ EOL)
 
     ldapsearch -o ldif-wrap=no -xLLLZZ ${LDAP_BIND_DN_AND_PW} ${@}
 }
+
+
+function dpdf() {
+    qpdf --qdf --object-streams=disable "$1" "$2"
+}
+
+function li() {
+    OUT="${1%.ls}.js"
+    lsc -c "$1" && vim "$OUT" && rm "$OUT"
+}
+
