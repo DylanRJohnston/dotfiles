@@ -24,7 +24,7 @@ case "$(uname)" in
         # GPG AGENT
         #
 
-        if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(head -n 1 < "${HOME}/.gpg-agent-info" | awk 'BEGIN { FS = ":" }; {print $2}')" &>/dev/null; then
+        if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(head -n 1 < "${HOME}/.gpg-agent-info" | awk 'BEGIN { FS = ":" }; {print $2}')"; then
             . "${HOME}/.gpg-agent-info"
             export GPG_AGENT_INFO
         else
