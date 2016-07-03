@@ -50,7 +50,7 @@ esac
 export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no"
 export CLICOLOR=1
 export WINEDEBUG="-all"
-export PS1="[\u@\h \${?}]:$ "
+export PS1=$'\\[\e[1;36m\\]$? \\[\e[1;33m\\]\u2192 \\[\e[0m\\]'
 export FLEETCTL_TUNNEL=172.17.8.101
 # Eternal bash history.
 export HISTFILESIZE=
