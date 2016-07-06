@@ -1,4 +1,7 @@
 #!/bin/env bash
+# If we're not already in a TMUX session attatch to the existing one or spawn a new one
+[ -z ${TMUX+x} ] && ( tmux attach-session || tmux )
+
 #
 # Environment
 #
