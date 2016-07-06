@@ -1,57 +1,17 @@
 #!/bin/env bash
-
-case "$(uname)" in
-    "Darwin" )
-        #
-        # Environment
-        #
-
-        export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
-        export HOMEBREW_MAKE_JOBS="$(sysctl -n hw.logicalcpu)"
-
-        alias xargs="gxargs"
-        eval "$(gdircolors ~/.dircolors)"
-
-        #
-        # Bash Completion
-        #
-
-        if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
-            . $(brew --prefix)/share/bash-completion/bash_completion
-        fi
-
-        #
-        # GPG AGENT
-        #
-
-        if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(head -n 1 < "${HOME}/.gpg-agent-info" | awk 'BEGIN { FS = ":" }; {print $2}')"; then
-            . "${HOME}/.gpg-agent-info"
-            export GPG_AGENT_INFO
-        else
-            eval "$(/usr/local/bin/gpg-agent)"
-        fi
-
-        GPG_TTY=$(tty)
-        export GPG_TTY
-
-        #
-        # MISC FUNCTIONS
-        #
-        function free() {
-            vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
-        }
-    ;;
-esac
-
 #
 # Environment
 #
-
-export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no"
-export CLICOLOR=1
-export WINEDEBUG="-all"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
 export PS1=$'\\[\e[1;36m\\]$? \\[\e[1;33m\\]\u2192 \\[\e[0m\\]'
+export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no"
+export HOMEBREW_MAKE_JOBS="$(sysctl -n hw.logicalcpu)"
 export FLEETCTL_TUNNEL=172.17.8.101
+export WINEDEBUG="-all"
+export CLICOLOR=1
+
+eval "$(gdircolors ~/.dircolors)"
+
 # Eternal bash history.
 export HISTFILESIZE=
 export HISTSIZE=
@@ -60,11 +20,14 @@ export HISTCONTROL=erasedups
 export HISTFILE=~/.bash_eternal_history
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
+# Aliases
 alias ls="gls --color"
 alias sl="ls"
 alias ll="ls -l"
 alias la="ls -la"
+
 alias v="vagrant"
+alias xargs="gxargs"
 alias flix="peerflix --vlc"
 alias htop="TERM=screen htop"
 alias cast="DEBUG=castnow* castnow --address=192.168.1.114"
@@ -75,8 +38,35 @@ alias fleetctl-destroy-all-units='fleetctl destroy $(fleetctl list-units -fields
 alias fleetctl-destroy-all-unit-files='fleetctl destroy $(fleetctl list-unit-files -fields=unit -no-legend)'
 
 #
+# Bash Completion
+#
+
+if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+    . $(brew --prefix)/share/bash-completion/bash_completion
+fi
+
+#
+# GPG AGENT
+#
+
+if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(head -n 1 < "${HOME}/.gpg-agent-info" | awk 'BEGIN { FS = ":" }; {print $2}')"; then
+    . "${HOME}/.gpg-agent-info"
+    export GPG_AGENT_INFO
+else
+    eval "$(/usr/local/bin/gpg-agent)"
+fi
+
+GPG_TTY=$(tty)
+export GPG_TTY
+
+#
 # MISC FUNCTIONS
 #
+
+# Mimics the free command from Linux
+function free() {
+    vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
+}
 
 # Work around for the mongo meteor command
 mmongo() {
@@ -148,3 +138,12 @@ function li() {
     lsc -c "$1" && vim "$OUT" && rm "$OUT"
 }
 
+# Sets the exit code, useful for some werid things.
+bexit() { return $1; }
+
+# Creates a new meteor project with safe and sane defaults
+# function meteor_new_safe() {
+#     REMOVE=( autopublish insecure )
+#     ADD=( check audit-argument-checks aldeed:collection2 service-configuration meteorhacks:kadira )
+#     meteor create . && meteor remove autopublish insecure && meteor add check audit-argument-checks
+# }
