@@ -1,12 +1,5 @@
-
-# Dark 256 color solarized theme for the color GNU ls utility.
-# Used and tested with dircolors (GNU coreutils) 8.5
-#
-# @author  {@link http://sebastian.tramp.name Sebastian Tramp}
-# @license http://sam.zoy.org/wtfpl/  Do What The Fuck You Want To Public License (WTFPL)
-#
-# More Information at
-# https://github.com/seebi/dircolors-solarized
+# Zenburn color theme for the color GNU ls utility.
+# Ivaylo Kuzev <ivkuzev@gmail.com>, 2014 - 2015
 
 # Term Section
 TERM Eterm
@@ -27,19 +20,16 @@ TERM console
 TERM cygwin
 TERM dtterm
 TERM eterm-color
-TERM fbterm
 TERM gnome
 TERM gnome-256color
 TERM jfbterm
 TERM konsole
-TERM konsole-256color
 TERM kterm
 TERM linux
 TERM linux-c
 TERM mach-color
 TERM mlterm
 TERM putty
-TERM putty-256color
 TERM rxvt
 TERM rxvt-256color
 TERM rxvt-cygwin
@@ -50,8 +40,6 @@ TERM rxvt-unicode-256color
 TERM screen
 TERM screen-256color
 TERM screen-256color-bce
-TERM screen-256color-s
-TERM screen-256color-bce-s
 TERM screen-bce
 TERM screen-w
 TERM screen.linux
@@ -70,10 +58,6 @@ TERM xterm-termite
 
 ## Documentation
 #
-# standard colors
-#
-# Below are the color init strings for the basic file types. A color init
-# string consists of one or more of the following numeric codes:
 # Attribute codes:
 # 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
 # Text color codes:
@@ -81,200 +65,204 @@ TERM xterm-termite
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
 #
-#
-# 256 color support
-# see here: http://www.mail-archive.com/bug-coreutils@gnu.org/msg11030.html)
-#
 # Text 256 color coding:
 # 38;5;COLOR_NUMBER
 # Background 256 color coding:
 # 48;5;COLOR_NUMBER
 
-## Special files
-
-NORMAL 00;38;5;244 # no color code at all
-#FILE 00 # regular file: use no color at all
-RESET 0 # reset to "normal" color
-DIR 00;38;5;33 # directory 01;34
-LINK 01;38;5;37 # symbolic link. (If you set this to 'target' instead of a
- # numerical value, the color is as for the file pointed to.)
-MULTIHARDLINK 00 # regular file with more than one link
-FIFO 48;5;230;38;5;136;01 # pipe
-SOCK 48;5;230;38;5;136;01 # socket
-DOOR 48;5;230;38;5;136;01 # door
-BLK 48;5;230;38;5;244;01 # block device driver
-CHR 48;5;230;38;5;244;01 # character device driver
-ORPHAN 48;5;235;38;5;160 # symlink to nonexistent file, or non-stat'able file
-SETUID 48;5;160;38;5;230 # file that is setuid (u+s)
-SETGID 48;5;136;38;5;230 # file that is setgid (g+s)
-CAPABILITY 30;41 # file with capability
-STICKY_OTHER_WRITABLE 48;5;64;38;5;230 # dir that is sticky and other-writable (+t,o+w)
-OTHER_WRITABLE 48;5;235;38;5;33 # dir that is other-writable (o+w) and not sticky
-STICKY 48;5;33;38;5;230 # dir with the sticky bit set (+t) and not other-writable
+# block device driver:
+BLK 48;5;108;38;5;223;01
+# file with capability:
+CAPABILITY 01;38;5;95
+# character device driver:
+CHR 48;5;108;38;5;223;01
+# directory:
+DIR 01;38;5;223
+# door:
+DOOR 48;5;234;38;5;180;01
 # This is for files with execute permission:
-EXEC 01;38;5;64
+EXEC 01;38;5;108
+# pipe:
+FIFO 48;5;234;38;5;180;01
+# regular file:
+#FILE 00
+# symbolic link:
+LINK 48;5;234;38;5;223
+# normal (nonfilename) text:
+#NORMAL 00
+# orphaned symbolic link:
+ORPHAN 48;5;234;38;5;187
+# directory that is other-writable (o+w) and not sticky:
+OTHER_WRITABLE 48;5;234;38;5;180
+# file that is setuid (u+s):
+SETUID 48;5;234;38;5;66
+# file that is setgid (g+s):
+SETGID 48;5;234;38;5;66
+# socket:
+SOCK 48;5;234;38;5;180;01
+# directory with the sticky bit set (+t) and not other-writable:
+STICKY 48;5;180;38;5;234
+# dir that is sticky and other-writable (+t,o+w):
+STICKY_OTHER_WRITABLE 48;5;180;38;5;234
 
-## Archives or compressed (violet + bold for compression)
-.tar    00;38;5;61
-.tgz    01;38;5;61
-.arj    01;38;5;61
-.taz    01;38;5;61
-.lzh    01;38;5;61
-.lzma   01;38;5;61
-.tlz    01;38;5;61
-.txz    01;38;5;61
-.zip    01;38;5;61
-.z      01;38;5;61
-.Z      01;38;5;61
-.dz     01;38;5;61
-.gz     01;38;5;61
-.lz     01;38;5;61
-.xz     01;38;5;61
-.bz2    01;38;5;61
-.bz     01;38;5;61
-.tbz    01;38;5;61
-.tbz2   01;38;5;61
-.tz     01;38;5;61
-.deb    01;38;5;61
-.rpm    01;38;5;61
-.jar    01;38;5;61
-.rar    01;38;5;61
-.ace    01;38;5;61
-.zoo    01;38;5;61
-.cpio   01;38;5;61
-.7z     01;38;5;61
-.rz     01;38;5;61
-.apk    01;38;5;61
-.gem    01;38;5;61
+# archives
+.7z 01;38;5;174
+.arj 01;38;5;174
+.bz2 01;38;5;174
+.bz 01;38;5;174
+.gz 01;38;5;174
+.rar 01;38;5;174
+.tar 01;38;5;174
+.tgz 01;38;5;174
+.tbz 01;38;5;174
+.tbz2 01;38;5;174
+.xz 01;38;5;174
+.zip 01;38;5;174
 
-# Image formats (yellow)
-.jpg    00;38;5;136
-.JPG    00;38;5;136 #stupid but needed
-.jpeg   00;38;5;136
-.gif    00;38;5;136
-.bmp    00;38;5;136
-.pbm    00;38;5;136
-.pgm    00;38;5;136
-.ppm    00;38;5;136
-.tga    00;38;5;136
-.xbm    00;38;5;136
-.xpm    00;38;5;136
-.tif    00;38;5;136
-.tiff   00;38;5;136
-.png    00;38;5;136
-.svg    00;38;5;136
-.svgz   00;38;5;136
-.mng    00;38;5;136
-.pcx    00;38;5;136
-.dl     00;38;5;136
-.xcf    00;38;5;136
-.xwd    00;38;5;136
-.yuv    00;38;5;136
-.cgm    00;38;5;136
-.emf    00;38;5;136
-.eps    00;38;5;136
-.CR2    00;38;5;136
-.ico    00;38;5;136
+# packaged apps
+.apk 01;38;5;95
+.deb 01;38;5;174
+.jad 01;38;5;95
+.jar 01;38;5;95
+.rpm 01;38;5;174
 
-# Files of special interest (base1 + bold)
-.tex             01;38;5;245
-.rdf             01;38;5;245
-.owl             01;38;5;245
-.n3              01;38;5;245
-.ttl             01;38;5;245
-.nt              01;38;5;245
-.torrent         01;38;5;245
-.xml             01;38;5;245
-*Makefile        01;38;5;245
-*Rakefile        01;38;5;245
-*build.xml       01;38;5;245
-*rc              01;38;5;245
-*1               01;38;5;245
-.nfo             01;38;5;245
-*README          01;38;5;245
-*README.txt      01;38;5;245
-*readme.txt      01;38;5;245
-.md              01;38;5;245
-*README.markdown 01;38;5;245
-.ini             01;38;5;245
-.yml             01;38;5;245
-.cfg             01;38;5;245
-.conf            01;38;5;245
-.c               01;38;5;245
-.cpp             01;38;5;245
-.cc              01;38;5;245
+# images|graphics
+.bmp 00;38;5;109
+.gif 00;38;5;109
+.ico 00;38;5;109
+.jpg 00;38;5;109
+.JPG 00;38;5;109
+.jpeg 00;38;5;109
+.png 00;38;5;109
+.svg 00;38;5;109
+.xbm 00;38;5;109
+.xpm 00;38;5;109
 
-# "unimportant" files as logs and backups (base01)
-.log        00;38;5;240
-.bak        00;38;5;240
-.aux        00;38;5;240
-.lof        00;38;5;240
-.lol        00;38;5;240
-.lot        00;38;5;240
-.out        00;38;5;240
-.toc        00;38;5;240
-.bbl        00;38;5;240
-.blg        00;38;5;240
-*~          00;38;5;240
-*#          00;38;5;240
-.part       00;38;5;240
-.incomplete 00;38;5;240
-.swp        00;38;5;240
-.tmp        00;38;5;240
-.temp       00;38;5;240
-.o          00;38;5;240
-.pyc        00;38;5;240
-.class      00;38;5;240
-.cache      00;38;5;240
+# audio formats
+.aac 00;38;5;116
+.au 00;38;5;116
+.flac 00;38;5;116
+.mid 00;38;5;116
+.midi 00;38;5;116
+.mka 00;38;5;116
+.mp3 00;38;5;116
+.mpc 00;38;5;116
+.ogg 00;38;5;116
+.ra 00;38;5;116
+.wav 00;38;5;116
 
-# Audio formats (orange)
-.aac    00;38;5;166
-.au     00;38;5;166
-.flac   00;38;5;166
-.mid    00;38;5;166
-.midi   00;38;5;166
-.mka    00;38;5;166
-.mp3    00;38;5;166
-.mpc    00;38;5;166
-.ogg    00;38;5;166
-.ra     00;38;5;166
-.wav    00;38;5;166
-.m4a    00;38;5;166
-# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axa    00;38;5;166
-.oga    00;38;5;166
-.spx    00;38;5;166
-.xspf   00;38;5;166
+# video formats
+.mov 00;38;5;66
+.mpg 00;38;5;66
+.mpeg 00;38;5;66
+.m2v 00;38;5;66
+.mkv 00;38;5;66
+.ogm 00;38;5;66
+.mp4 00;38;5;66
+.m4v 00;38;5;66
+.mp4v 00;38;5;66
+.vob 00;38;5;66
+.qt 00;38;5;66
+.nuv 00;38;5;66
+.wmv 00;38;5;66
+.asf 00;38;5;66
+.rm 00;38;5;66
+.rmvb 01;38;5;66
+.flc 00;38;5;66
+.avi 00;38;5;66
+.fli 00;38;5;66
+.flv 00;38;5;66
+.gl 00;38;5;66
+.m2ts 00;38;5;66
+.divx 00;38;5;66
+.webm 00;38;5;66
 
-# Video formats (as audio + bold)
-.mov    01;38;5;166
-.mpg    01;38;5;166
-.mpeg   01;38;5;166
-.m2v    01;38;5;166
-.mkv    01;38;5;166
-.ogm    01;38;5;166
-.mp4    01;38;5;166
-.m4v    01;38;5;166
-.mp4v   01;38;5;166
-.vob    01;38;5;166
-.qt     01;38;5;166
-.nuv    01;38;5;166
-.wmv    01;38;5;166
-.asf    01;38;5;166
-.rm     01;38;5;166
-.rmvb   01;38;5;166
-.flc    01;38;5;166
-.avi    01;38;5;166
-.fli    01;38;5;166
-.flv    01;38;5;166
-.gl     01;38;5;166
-.m2ts   01;38;5;166
-.divx   01;38;5;166
-.webm   01;38;5;166
-# http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axv 01;38;5;166
-.anx 01;38;5;166
-.ogv 01;38;5;166
-.ogx 01;38;5;166
+# shell
+.awk 00;38;5;151
+.bash 00;38;5;151
+.bat 00;38;5;151
+.BAT 00;38;5;151
+.sed 00;38;5;151
+.sh 00;38;5;151
+.zsh 00;38;5;151
 
+# build
+*CMakeLists.txt 00;38;5;187
+.cabal 00;38;5;187
+*Makefile 00;38;5;187
+.mk 00;38;5;187
+.make 00;38;5;187
 
+# source files
+.c 01;38;5;187
+.h 01;38;5;187
+.s 01;38;5;187
+.cs 01;38;5;187
+.java 01;38;5;187
+.scala 01;38;5;187
+.hs 01;38;5;187
+.py 01;38;5;187
+.rb 01;38;5;187
+.php 01;38;5;187
+.pl 01;38;5;187
+.vim 01;38;5;187
+.js 01;38;5;187
+.coffee 01;38;5;187
+.go 01;38;5;187
+.lisp 01;38;5;187
+.scm 01;38;5;187
+
+# documents
+.txt 04;38;5;188
+.tex 04;38;5;188
+.html 04;38;5;188
+.xhtml 04;38;5;188
+.xml 04;38;5;188
+.md 04;38;5;188
+.mkd 04;38;5;188
+.markdown 04;38;5;188
+.org 04;38;5;188
+.pandoc 04;38;5;188
+.pdc 04;38;5;188
+.pdf 04;38;5;188
+
+# Files of special interest
+*rc 04;38;5;180
+.conf 04;38;5;180
+*Dockerfile 04;38;5;180
+
+# meta
+*README 04;38;5;187
+*LICENSE 04;38;5;187
+*AUTHORS 04;38;5;187
+
+# version control
+.gitignore 00;38;5;248
+.gitmodules 00;38;5;248
+
+# logs and backups
+.log 00;38;5;234
+.bak 00;38;5;234
+.aux 00;38;5;234
+.toc 00;38;5;234
+*~ 00;38;5;234
+*# 00;38;5;234
+.swp 00;38;5;234
+.tmp 00;38;5;234
+.temp 00;38;5;234
+.o 00;38;5;234
+.pyc 00;38;5;234
+.class 00;38;5;234
+.cache 00;38;5;234
+
+# pacman files
+.pacnew 48;5;95;38;5;108
+.pacsave 48;5;95;38;5;108
+.pacorig 48;5;95;38;5;108
+*PKGBUILD 00;38;5;110
+
+# rpm files
+.rpmsave 48;5;95;38;5;108
+.rpmorig 48;5;95;38;5;108
+.rpmnew 48;5;95;38;5;108
+.spec 00;38;5;110

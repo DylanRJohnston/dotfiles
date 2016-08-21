@@ -1,12 +1,10 @@
-#!/bin/env bash
-# If we're not already in a TMUX session attatch to the existing one or spawn a new one
-[ -z ${TMUX+x} ] && ( tmux attach-session || tmux )
+#!/usr/bin/env bash
 
 #
 # Environment
 #
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
-export PS1=$'\\[\e[1;36m\\]$? \\[\e[1;33m\\]\u2192 \\[\e[0m\\]'
+export PATH="/Users/dylanj/.stack/programs/x86_64-osx/ghc-8.0.1/bin:/Users/dylanj/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
+export PS1=$'\\[\e[1;36m\\]$? \\[\e[1;33m\\]-> \\[\e[0m\\]'
 export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no"
 export HOMEBREW_MAKE_JOBS="$(sysctl -n hw.logicalcpu)"
 export FLEETCTL_TUNNEL=172.17.8.101
@@ -25,7 +23,7 @@ export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Aliases
 alias ls="gls --color"
-alias sl="ls"
+alias sl="ls" # Fuck steam locomotive
 alias ll="ls -l"
 alias la="ls -la"
 
@@ -33,6 +31,7 @@ alias v="vagrant"
 alias xargs="gxargs"
 alias flix="peerflix --vlc"
 alias htop="TERM=screen htop"
+alias ffmpeg="ffmpeg -hide_banner"
 alias cast="DEBUG=castnow* castnow --address=192.168.1.114"
 alias gitlog="git log --pretty=oneline --graph --decorate --all"
 alias gitclear="git reflog expire --expire=now --all && git gc --prune=now --aggressive"
@@ -145,8 +144,14 @@ function li() {
 bexit() { return $1; }
 
 # Creates a new meteor project with safe and sane defaults
+# TODO: Fix this
 # function meteor_new_safe() {
 #     REMOVE=( autopublish insecure )
 #     ADD=( check audit-argument-checks aldeed:collection2 service-configuration meteorhacks:kadira )
 #     meteor create . && meteor remove autopublish insecure && meteor add check audit-argument-checks
 # }
+
+function where {
+    ll $(which "${@}")
+}
+
