@@ -3,7 +3,7 @@
 #
 # Environment
 #
-export PATH="/Users/dylanj/.stack/programs/x86_64-osx/ghc-8.0.1/bin:/Users/dylanj/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
+export PATH="$HOME/.local/bin:$HOME/.cabal/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
 export PS1=$'\\[\e[1;36m\\]$? \\[\e[1;33m\\]-> \\[\e[0m\\]'
 export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no"
 export HOMEBREW_MAKE_JOBS="$(sysctl -n hw.logicalcpu)"
@@ -26,6 +26,8 @@ alias ls="gls --color"
 alias sl="ls" # Fuck steam locomotive
 alias ll="ls -l"
 alias la="ls -la"
+
+alias ghci="ghci 2>&1 | HsColour -tty256"
 
 alias v="vagrant"
 alias xargs="gxargs"
