@@ -27,15 +27,13 @@ alias sl="ls" # Fuck steam locomotive
 alias ll="ls -l"
 alias la="ls -la"
 
-alias ghci="ghci 2>&1 | HsColour -tty256"
-
 alias v="vagrant"
 alias xargs="gxargs"
 alias flix="peerflix --vlc"
 alias htop="TERM=screen htop"
 alias ffmpeg="ffmpeg -hide_banner"
 alias cast="DEBUG=castnow* castnow --address=192.168.1.114"
-alias gitlog="git log --pretty=oneline --graph --decorate --all"
+alias gitlog="git log --oneline --graph --decorate --all"
 alias gitclear="git reflog expire --expire=now --all && git gc --prune=now --aggressive"
 alias mango="mongod --setParameter textSearchEnabled=true --config /usr/local/etc/mongod.conf"
 alias fleetctl-destroy-all-units='fleetctl destroy $(fleetctl list-units -fields=unit -no-legend)'
