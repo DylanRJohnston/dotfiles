@@ -51,8 +51,21 @@ fi
 # GPG AGENT
 #
 
-if [ -f "${HOME}/.gpg-agent-info" ] && kill -0 "$(head -n 1 < "${HOME}/.gpg-agent-info" | awk 'BEGIN { FS = ":" }; {print $2}')"; then
-    . "${HOME}/.gpg-agent-info"
+AGENT_INFO_PATH="${HOME}/.gpg-agent-info"
+if \
+    # If the gpg-agent-info file exists
+    [ -f "${AGENT_INFO_PATH}" ] && \
+    # And the process running at the specified PID is gpg-agent
+    [ \
+        "/usr/local/bin/gpg-agent" == \
+        "$(ps -o command= -p "$(
+            IFS=':'
+            INFO=($(< "${AGENT_INFO_PATH}"))
+            echo "${INFO[1]}"
+        )")" \
+    ]
+then
+    . "${AGENT_INFO_PATH}"
     export GPG_AGENT_INFO
 else
     eval "$(/usr/local/bin/gpg-agent)"
