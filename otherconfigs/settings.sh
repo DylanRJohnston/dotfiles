@@ -126,7 +126,7 @@ defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool 
 defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Move screen shots to ~/Screen Shots
-mkdir -p ~/Screen\ Shots
-defaults write com.apple.screencapture location ~/Screen\ Shots
+mkdir -p ~/Pictures/screenshots
+defaults write com.apple.screencapture location ~/Pictures/screenshots
 
 open -a "Google Chrome" --args --make-default-browser
