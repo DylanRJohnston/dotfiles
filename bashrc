@@ -3,7 +3,7 @@
 #
 # Environment
 #
-export PATH="$HOME/.local/bin:$HOME/.cabal/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
+export PATH="$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:/usr/texbin"
 export PS1=$'\\[\e[1;36m\\]$? \\[\e[1;33m\\]-> \\[\e[0m\\]'
 export PDSH_SSH_ARGS_APPEND="-o StrictHostKeyChecking=no"
 export HOMEBREW_MAKE_JOBS="$(sysctl -n hw.logicalcpu)"
