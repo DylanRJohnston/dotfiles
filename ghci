@@ -1,2 +1,32 @@
-:def h \str -> return $ ":! hoogle --count=15 \"" ++ str ++ "\""
+:set -XApplicativeDo
+:set -XBangPatterns
+:set -XConstraintKinds
+:set -XDataKinds
+:set -XDeriveFunctor
+:set -XDeriveFoldable
+:set -XDeriveGeneric
+:set -XDeriveLift
+:set -XDeriveTraversable
+:set -XDisambiguateRecordFields
+:set -XFlexibleContexts
+:set -XFlexibleInstances
+:set -XFunctionalDependencies
+:set -XGADTs
+:set -XGeneralizedNewtypeDeriving
+:set -XNoImplicitPrelude
+:set -XKindSignatures
+:set -XMultiParamTypeClasses
+:set -XOverloadedStrings
+:set -XPatternGuards
+:set -XPatternSynonyms
+:set -XPolyKinds
+:set -XRankNTypes
+:set -XScopedTypeVariables
+:set -XStandaloneDeriving
+:set -XTypeFamilies
+:set -XTypeOperators
+:set -XViewPatterns
 :set prompt "λ "
+:def h \str -> return $ ":! hoogle --count=15 \"" ++ str ++ "\""
+
+import Protolude
