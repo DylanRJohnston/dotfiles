@@ -40,6 +40,7 @@ alias mango="mongod --setParameter textSearchEnabled=true --config /usr/local/et
 alias fleetctl-destroy-all-units='fleetctl destroy $(fleetctl list-units -fields=unit -no-legend)'
 alias fleetctl-destroy-all-unit-files='fleetctl destroy $(fleetctl list-unit-files -fields=unit -no-legend)'
 
+
 #
 # Bash Completion
 #
@@ -164,6 +165,14 @@ function where {
 
 function tellme() {
     ${@} && say done || say error
+}
+
+function prepl() {
+    if [ "all" == "${1:-}" ]; then
+        psci 'bower_components/purescript-*/src/**/*.purs' 'src/**/*.purs' "${@:2}"
+    else
+        psci 'bower_components/purescript-*/src/**/*.purs' "${@:1}"
+    fi
 }
 
 #
