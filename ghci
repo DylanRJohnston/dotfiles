@@ -13,7 +13,6 @@
 :set -XFunctionalDependencies
 :set -XGADTs
 :set -XGeneralizedNewtypeDeriving
-:set -XNoImplicitPrelude
 :set -XKindSignatures
 :set -XMultiParamTypeClasses
 :set -XOverloadedStrings
@@ -28,5 +27,3 @@
 :set -XViewPatterns
 :set prompt "λ "
 :def h \str -> return $ ":! hoogle --count=15 \"" ++ str ++ "\""
-
-import Protolude
