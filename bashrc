@@ -162,6 +162,10 @@ function where {
     ll $(which "${@}")
 }
 
+function tellme() {
+    ${@} && say done || say error
+}
+
 #
 # HOMEBREW GITHUB API TOKEN
 #
