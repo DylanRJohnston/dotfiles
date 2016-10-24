@@ -1,0 +1,46 @@
+set mouse=
+set nospell
+
+
+set background=dark
+let g:solarized_termcolors=16
+let g:solarized_contrast="high"
+colorscheme solarized
+color solarized
+
+let g:indent_guides_enable_on_vim_startup = 0
+
+autocmd Syntax * normal zR
+let g:DisableAutoPHPFolding = 1
+
+nnoremap j gj
+nnoremap k gk
+
+UnBundle 'spf13/vim-autoclose'
+UnBundle 'amirh/HTML-AutoCloseTag'
+UnBundle 'Twinside/vim-haskellConceal'
+UnBundle 'Twinside/vim-haskellFold'
+UnBundle 'bitc/vim-hdevtools'
+UnBundle 'lukerandall/haskellmode-vim'
+
+let g:autoclose_on = 0
+
+set autoindent
+set expandtab
+set smarttab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+
+set wrap
+set linebreak
+set textwidth=0
+set incsearch
+
+command! W w !sudo tee % > /dev/null
+
+set clipboard=
+set whichwrap=
+
+highlight CursorLineNr ctermbg=0
+highlight SignColumn ctermbg=0
