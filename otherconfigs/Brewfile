@@ -26,3 +26,13 @@ wget
 haskell-stack
 bash
 mas
+cmatrix
+elm
+ruby
+git
+vim --with-override-system-vi --with-lua
+moreutils
+grep
+openssh
+lsof
+youtube-dl
