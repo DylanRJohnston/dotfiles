@@ -2,6 +2,7 @@ set -gx PATH /Users/dylanj/.local/bin $PATH
 set fish_greeting ""
 
 set -gx HOMEBREW_MAKE_JOBS (sysctl -n hw.logicalcpu)
+set -gx Z_SCRIPT_PATH /usr/local/etc/profile.d/z.sh
 
 alias sl "ls"
 alias flix "peerflix --vlc"
@@ -33,6 +34,11 @@ end
 
 function where
     ll (which -a $argv)
+end
+
+function tellme
+    echo $argv
+    eval $argv ;and say done ;or say failed
 end
 
 set -gx HOMEBREW_GITHUB_API_TOKEN (decrypt-wrapper ^/dev/null "
