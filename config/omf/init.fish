@@ -1,6 +1,8 @@
 #!/usr/bin/env fish
 
 set -gx PATH /Users/dylanj/.local/bin $PATH
+set -gx HOMEBREW_MAKE_JOBS (sysctl -n hw.logicalcpu)
+
 set fish_greeting ""
 
 set -gx HOMEBREW_MAKE_JOBS (sysctl -n hw.logicalcpu)
