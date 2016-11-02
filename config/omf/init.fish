@@ -6,7 +6,11 @@
 
 # Use Z instead of cd
 function cd
-    z $argv
+    if test -d "$argv"
+        builtin cd $argv
+    else
+        z $argv
+    end
 end
 
 # Fuck steam locomotive
