@@ -1,44 +1,52 @@
 #!/usr/bin/env fish
 
-set -gx PATH /Users/dylanj/.local/bin $PATH
-set -gx HOMEBREW_MAKE_JOBS (sysctl -n hw.logicalcpu)
+#
+# UTILITY FUNCTIONS
+#
 
-set fish_greeting ""
-
+# Use Z instead of cd
 function cd
     z $argv
 end
 
+# Fuck steam locomotive
 function sl
     ls $argv
 end
 
+# Sick of type this out
 function flix
     peerflix --vlc $argv
 end
 
+# Hide the ffmpeg banner
 function ffmpeg
     command ffmpeg -hide-banner $argv
 end
 
+# Commands to run when leaving work. Right now just unmounts the time machine backup
 function leaving-work
     diskutil unmountDisk 'Time Machine'
 end
 
+# Better git log
 function gitlog
     git log --oneline --graph --decorate --all $argv
 end
 
+# Update all the vim packages
 function vim-update-packages
     vim +BundleInstall +BundleClean +q $arv
 end
 
+# Startup the gpg agent. Why doesn't gpg-agent handle its own service?
 function start-gpg-agent
     /usr/local/bin/gpg-agent ^/dev/null
     set -gx GPG_AGENT_INFO (sed -E 's/.*=(.*)/\1/' <~/.gpg-agent-info)
     set -gx GPG_TTY (tty)
 end
 
+# Give highlighting to man pages
 function man
     set -x LESS_TERMCAP_mb (printf "\e[01;31m")
     set -x LESS_TERMCAP_md (printf "\e[01;31m")
@@ -50,27 +58,43 @@ function man
     env man $argv
 end
 
+# Wrapper command for decrypting inline cipher text. See HOMEBREW_GITHUB_API_TOKEN
 function decrypt-wrapper
     echo $argv[1] | sed -E 's/^ +(.*)/\1/' | gpg --batch --decrypt
 end
 
+# Mimics the free command on Linux
 function free
     vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
 end
 
+# Like which but resolves sym links. Useful for homebrew
 function where
     ll (which -a $argv)
 end
 
+# Tells you when long running commands have finished or crashed
 function tellme
     eval $argv ;and say done ;or say failed
 end
 
+# Gives you the repl for purescript when not using pulp
 function prepl
     psci 'bower_componenets/purescript-*/src/**/*.purs' 'src/**/*.purs' $argv
 end
 
+#
+# ENVIRONMENT VARIABLES
+#
+set -gx PATH /Users/dylanj/.local/bin $PATH
+set -gx HOMEBREW_MAKE_JOBS (sysctl -n hw.logicalcpu)
+
+set fish_greeting ""
+
+# Startup the gpg agent
 start-gpg-agent
+
+# Decrypt the github api token
 set -gx HOMEBREW_GITHUB_API_TOKEN (decrypt-wrapper ^/dev/null "
     -----BEGIN PGP MESSAGE-----
     Version: GnuPG v2
