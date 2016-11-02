@@ -8,6 +8,7 @@
 function cd
     if test -d "$argv"
         builtin cd $argv
+        z --add (pwd)
     else
         z $argv
     end
