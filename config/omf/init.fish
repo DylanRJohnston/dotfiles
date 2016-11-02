@@ -38,7 +38,6 @@ function start-gpg-agent
     set -gx GPG_AGENT_INFO (sed -E 's/.*=(.*)/\1/' <~/.gpg-agent-info)
     set -gx GPG_TTY (tty)
 end
-start-gpg-agent
 
 function man
     set -x LESS_TERMCAP_mb (printf "\e[01;31m")
@@ -64,6 +63,7 @@ function tellme
     eval $argv ;and say done ;or say failed
 end
 
+start-gpg-agent
 set -gx HOMEBREW_GITHUB_API_TOKEN (decrypt-wrapper ^/dev/null "
     -----BEGIN PGP MESSAGE-----
     Version: GnuPG v2
@@ -86,4 +86,3 @@ set -gx HOMEBREW_GITHUB_API_TOKEN (decrypt-wrapper ^/dev/null "
     -----END PGP MESSAGE-----
     "
 )
-
