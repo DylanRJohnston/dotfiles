@@ -1,3 +1,5 @@
+#!/usr/bin/env fish
+
 set -gx PATH /Users/dylanj/.local/bin $PATH
 set fish_greeting ""
 
