@@ -54,13 +54,20 @@ function decrypt-wrapper
     echo $argv[1] | sed -E 's/^ +(.*)/\1/' | gpg --batch --decrypt
 end
 
+function free
+    vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
+end
+
 function where
     ll (which -a $argv)
 end
 
 function tellme
-    echo $argv
     eval $argv ;and say done ;or say failed
+end
+
+function prepl
+    psci 'bower_componenets/purescript-*/src/**/*.purs' 'src/**/*.purs' $argv
 end
 
 start-gpg-agent
