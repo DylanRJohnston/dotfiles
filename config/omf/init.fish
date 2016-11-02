@@ -5,14 +5,33 @@ set -gx HOMEBREW_MAKE_JOBS (sysctl -n hw.logicalcpu)
 
 set fish_greeting ""
 
-set -gx HOMEBREW_MAKE_JOBS (sysctl -n hw.logicalcpu)
-set -gx Z_SCRIPT_PATH /usr/local/etc/profile.d/z.sh
+function cd
+    z $argv
+end
 
-alias sl "ls"
-alias flix "peerflix --vlc"
-alias ffmpeg "ffmpeg -hide_banner"
-alias leaving-work "diskutil unmountDisk 'Time Machine'"
-alias gitlog "git log --oneline --grpah --decorate --all"
+function sl
+    ls $argv
+end
+
+function flix
+    peerflix --vlc $argv
+end
+
+function ffmpeg
+    command ffmpeg -hide-banner $argv
+end
+
+function leaving-work
+    diskutil unmountDisk 'Time Machine'
+end
+
+function gitlog
+    git log --oneline --graph --decorate --all $argv
+end
+
+function vim-update-packages
+    vim +BundleInstall +BundleClean +q $arv
+end
 
 function start-gpg-agent
     /usr/local/bin/gpg-agent ^/dev/null
