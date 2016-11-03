@@ -26,7 +26,7 @@ end
 
 # Hide the ffmpeg banner
 function ffmpeg
-    command ffmpeg -hide-banner $argv
+    command ffmpeg -hide_banner $argv
 end
 
 # Commands to run when leaving work. Right now just unmounts the time machine backup
@@ -46,7 +46,7 @@ end
 
 # Startup the gpg agent. Why doesn't gpg-agent handle its own service?
 function start-gpg-agent
-    /usr/local/bin/gpg-agent ^/dev/null
+    /usr/local/bin/gpg-agent ^/dev/null >/dev/null
     set -gx GPG_AGENT_INFO (sed -E 's/.*=(.*)/\1/' <~/.gpg-agent-info)
     set -gx GPG_TTY (tty)
 end
@@ -88,6 +88,30 @@ function prepl
     psci 'bower_componenets/purescript-*/src/**/*.purs' 'src/**/*.purs' $argv
 end
 
+function decrypt-audible
+    set -l activation_bytes (decrypt-wrapper ^/dev/null "
+        -----BEGIN PGP MESSAGE-----
+        Version: GnuPG v2
+
+        hQIMA3X6OWk9Plj9AQ//U79zuiW1oJ0YanbAEZ9hRXJ7iBidrPzZuFM/kvnbq+0U
+        CCy7OtMU4iYX1rx1jRfA3hCK53aDPpMhfFeVgQTNICpwbOQ9QJumfMPhKRnqs7ay
+        le/RvH2giHWccQMF8u3f5Uef9B74iklbW5Y5ufrAyMj5ROukttlsEq1oSWZhC4qy
+        zqlHXMk2x1O2uJ23S1DrRGb21H4bZiUG5FByHTQO2PAE6+kkl3vDH9Prw4p9EwEf
+        oIY9/tR1gB4p4O+b6TtnMdHeT8D+7055Pfn6JbC42DNfdcvrrmtmJD9iAzTzES0h
+        b3K5MNebg7eIbfEK2jMtkGAsQWIfGVxvpZfJiq0RbHVx/l2Be7g4aCU1RCjJ44Dz
+        +60BQx02SdvWxGJN5Fyx1vBIIqe398H5HdS9xh03Pm1RucmX2Z5QUGlmvtbAaoip
+        hBJcx2e7QF+Qwij6xNCCBZ4f49e2yjpYs2gcBdWJYKwVzDY8auJ7H/BFTwGJWlcZ
+        esBW6Wk8/PrR1GcvZs+1KmnIFta/DHKaQYRBCCYQ5i1ubtPYZZ9uGygUSgOp4Iq6
+        ud1LwHOYeceyDzgKTQ93AaiVFZ490mh1wXIhCpIsL/N/8YFFDV/SHUi5w2ZilVac
+        T5ILMRylmIuQ3Q6hHms7hzoLIPHCkmoqVxRDNTKYB33HS5Zjg9rJjptncrhzSu7S
+        QwGz5dAFOVz5XommVGeCBlZ7Dz85yRUAlqG3tqGZUYyY6i9FGIBnwl9pMBwIqzDE
+        o51D2jJPWZZ9LOZH0cID7qRtgfo=
+        =SU37
+        -----END PGP MESSAGE-----
+        "
+    )
+    ffmpeg -activation_bytes $activation_bytes -i $argv[1] -vn -c:a copy (basename $argv[1] .aax).m4a
+end
 #
 # ENVIRONMENT VARIABLES
 #
