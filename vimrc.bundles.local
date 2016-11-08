@@ -1,2 +1,3 @@
 Bundle 'dag/vim-fish'
 Bundle 'junegunn/goyo.vim'
+Bundle 'idris-hackers/idris-vim'
