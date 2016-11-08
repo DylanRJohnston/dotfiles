@@ -1,6 +1,16 @@
 #!/usr/bin/env fish
 
 #
+# Stops this file being run multiple times
+#
+
+set -gx SHELL_NESTING "!$SHELL_NESTING"
+
+if test $SHELL_NESTING != "!!!"
+    exit 0
+end
+
+#
 # UTILITY FUNCTIONS
 #
 
