@@ -86,6 +86,10 @@ function gitlog
     git log --oneline --graph --decorate --all $argv
 end
 
+function gitclear
+    git reflog expire --expire=now --all ;and git gc --prune=now --aggressive
+end
+
 # Update all the vim packages
 function vim-update-packages
     vim +BundleInstall +BundleClean +q $arv
