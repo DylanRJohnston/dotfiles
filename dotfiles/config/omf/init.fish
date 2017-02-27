@@ -138,7 +138,8 @@ end
 
 # Gives you the repl for purescript when not using pulp
 function prepl
-    psci 'bower_componenets/purescript-*/src/**/*.purs' 'src/**/*.purs' $argv
+    psci 'bower_components/purescript-*/src/**/*.purs' 'src/**/*.purs' $argv
+end
 end
 
 function decrypt-audible
