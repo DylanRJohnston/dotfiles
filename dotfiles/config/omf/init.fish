@@ -140,6 +140,10 @@ end
 function prepl
     psci 'bower_components/purescript-*/src/**/*.purs' 'src/**/*.purs' $argv
 end
+
+function li
+    set -l OUT (basename $argv[1] .ls)".js"
+    lsc -c $argv[1] ;and vim $OUT ;and rm $OUT
 end
 
 function decrypt-audible
