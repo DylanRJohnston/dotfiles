@@ -174,6 +174,10 @@ end
 # ENVIRONMENT VARIABLES
 #
 set -gx PATH $HOME/.local/bin $HOME/.config/yarn/global/node_modules/.bin /usr/local/sbin $PATH
+set -gx CC /usr/local/bin/gcc-6
+set -gx CXX /usr/local/bin/g++-6
+set -gx CPP /usr/local/bin/cpp-6
+set -gx LD  /usr/local/bin/gcc-6
 set -gx HOMEBREW_MAKE_JOBS (sysctl -n hw.logicalcpu)
 
 set fish_greeting ""
