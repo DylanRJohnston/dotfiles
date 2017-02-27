@@ -98,8 +98,10 @@ end
 # Startup the gpg agent. Why doesn't gpg-agent handle its own service?
 function start-gpg-agent
     /usr/local/bin/gpg-agent ^/dev/null >/dev/null
-    set -gx GPG_AGENT_INFO (sed -E 's/.*=(.*)/\1/' <~/.gpg-agent-info)
     set -gx GPG_TTY (tty)
+    for x in GPG_AGENT_INFO SSH_AUTH_SOCK SSH_AGENT_PID
+        set -gx $x (sed -En "/"$x"/s/.*=(.*)/\1/p" <~/.gpg-agent-info)
+    end
 end
 
 # Give highlighting to man pages
