@@ -25,6 +25,8 @@
 :set -XTypeFamilies
 :set -XTypeOperators
 :set -XViewPatterns
+:set -XTypeApplications
+:set -XTupleSections
 :set prompt "λ "
 :def h \str -> return $ ":! hoogle --count=15 \"" ++ str ++ "\""
 
