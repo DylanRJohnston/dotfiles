@@ -1,16 +1,6 @@
 #!/usr/bin/env fish
 
 #
-# Stops this file being run multiple times
-#
-
-set -gx SHELL_NESTING "!$SHELL_NESTING"
-
-if test $SHELL_NESTING != "!!!"
-    exit 0
-end
-
-#
 # UTILITY FUNCTIONS
 #
 
@@ -181,10 +171,10 @@ set -gx HOMEBREW_MAKE_JOBS (sysctl -n hw.logicalcpu)
 set fish_greeting ""
 
 # Startup the gpg agent
-start-gpg-agent
+start-gpg-agent &
 
 # Decrypt the github api token
-set -gx HOMEBREW_GITHUB_API_TOKEN (decrypt-wrapper ^/dev/null "
+set -q HOMEBREW_GITHUB_API_TOKEN ;or set -gx HOMEBREW_GITHUB_API_TOKEN (decrypt-wrapper ^/dev/null "
     -----BEGIN PGP MESSAGE-----
     Version: GnuPG v2
 
