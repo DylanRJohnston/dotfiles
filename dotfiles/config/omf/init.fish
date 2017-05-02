@@ -58,7 +58,7 @@ end
 
 # Sick of type this out
 function flix
-    peerflix --vlc $argv
+    peerflix --vlc (pbpaste)
 end
 
 # Hide the ffmpeg banner
@@ -132,10 +132,6 @@ end
 function li
     set -l OUT (basename $argv[1] .ls)".js"
     lsc -c $argv[1] ;and vim $OUT ;and rm $OUT
-end
-
-function watch
-    peerflix --vlc (pbpaste)
 end
 
 function decrypt-audible
