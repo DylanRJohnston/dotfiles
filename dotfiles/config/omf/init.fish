@@ -134,6 +134,10 @@ function li
     lsc -c $argv[1] ;and vim $OUT ;and rm $OUT
 end
 
+function watch
+    peerflix --vlc (pbpaste)
+end
+
 function decrypt-audible
     set -l activation_bytes (decrypt-wrapper ^/dev/null "
         -----BEGIN PGP MESSAGE-----
