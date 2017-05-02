@@ -99,9 +99,7 @@ end
 function start-gpg-agent
     /usr/local/bin/gpg-agent ^/dev/null >/dev/null
     set -gx GPG_TTY (tty)
-    for x in GPG_AGENT_INFO SSH_AUTH_SOCK SSH_AGENT_PID
-        set -gx $x (sed -En "/"$x"/s/.*=(.*)/\1/p" <~/.gpg-agent-info)
-    end
+    set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 end
 
 # Give highlighting to man pages
