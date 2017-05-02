@@ -129,4 +129,7 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 mkdir -p ~/Pictures/screenshots
 defaults write com.apple.screencapture location ~/Pictures/screenshots
 
+# Disable press and hold
+defaults write -g ApplePressAndHoldEnabled -bool false
+
 open -a "Google Chrome" --args --make-default-browser
