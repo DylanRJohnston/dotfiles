@@ -29,5 +29,3 @@
 :set -XTupleSections
 :set prompt "λ "
 :def h \str -> return $ ":! hoogle --count=15 \"" ++ str ++ "\""
-
-let clear = Control.Monad.void $ System.Cmd.system "clear"
