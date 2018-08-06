@@ -56,6 +56,10 @@ function sl
     ls $argv
 end
 
+function v
+    vagrant $argv
+end
+
 # Sick of type this out
 function flix
     peerflix --vlc (pbpaste)
@@ -66,6 +70,10 @@ function ffmpeg
     command ffmpeg -hide_banner $argv
 end
 
+function ffmpeg-convert
+    ffmpeg -i $argv -c:v libx264 -c:a copy (dirname $argv)/(basename $argv .mkv)-converted.mkv
+end
+
 # Commands to run when leaving work. Right now just unmounts the time machine backup
 function leaving-work
     diskutil unmountDisk 'Time Machine'
@@ -73,7 +81,7 @@ end
 
 # Better git log
 function gitlog
-    git log --oneline --graph --decorate --all $argv
+    git log --oneline --graph --decorate --branches="*" $argv
 end
 
 function gitclear
@@ -135,7 +143,11 @@ function li
 end
 
 function decrypt-audible
-    set -l activation_bytes (decrypt-wrapper ^/dev/null "
+    set -l INPUT_FILE       $argv[1]
+    set -l COVER_IMAGE_TEMP (mktemp).jpg
+    set -l AUDIO_BOOK_TEMP  (mktemp).m4a
+    
+    set -l ACTIVATION_BYTES (decrypt-wrapper ^/dev/null "
         -----BEGIN PGP MESSAGE-----
         Version: GnuPG v2
 
@@ -156,7 +168,11 @@ function decrypt-audible
         -----END PGP MESSAGE-----
         "
     )
-    ffmpeg -activation_bytes $activation_bytes -i $argv[1] -vn -c:a copy (basename $argv[1] .aax).m4a
+    
+    ffmpeg -y -i $INPUT_FILE $COVER_IMAGE_TEMP
+    ffmpeg -y -activation_bytes $ACTIVATION_BYTES -i $INPUT_FILE -vn -c:a copy $AUDIO_BOOK_TEMP
+    mp4art --add $COVER_IMAGE_TEMP $AUDIO_BOOK_TEMP
+    mv $AUDIO_BOOK_TEMP (basename $argv[1] .aax).m4a
 end
 
 #

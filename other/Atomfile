@@ -1,5 +1,5 @@
 linter
 language-haskell
-linter-hdevtools
 file-icons
-hover-tooltips-hdevtools
+haskell-ghc-mod
+ide-haskell

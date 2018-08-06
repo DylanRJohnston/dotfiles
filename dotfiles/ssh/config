@@ -4,6 +4,18 @@ Host uwa
     ControlMaster auto
     ControlPersist 600
 
+Host edr-qa
+    User djohnston
+    HostName q-ubu-org-vd-01
+
+Host edr-api
+    User djohnston
+    HostName p-ubu-srf-vd-01
+
+Host edr-data
+    User djohnston
+    HostName p-ubu-srf-vd-02
+
 host *
 #    ControlMaster auto
 #    ControlPath /tmp/ssh_mux_%h_%p_%r

@@ -19,7 +19,7 @@ for FILE in ${FILES[@]}; do
     ln -sf "${DIR}/dotfiles/${FILE}" "${FILE_PATH}"
 done
 
-./other/install.sh
+#./other/install.sh
 #
 #
 #

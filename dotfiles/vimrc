@@ -38,7 +38,7 @@ set shiftwidth=4
 set expandtab
 set incsearch
 set history=1000
-set clipboard=unnamedplus,autoselect
+set clipboard=unnamed,autoselect
 
 set completeopt=menuone,menu,longest
 
@@ -46,6 +46,10 @@ set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.cabal-sandbox
 set wildmode=longest,list,full
 set wildmenu
 set completeopt+=longest
+
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
 
 set t_Co=256
 set cmdheight=1
