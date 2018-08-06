@@ -1,0 +1,8 @@
+zsh-users/zsh-syntax-highlighting
+bhilburn/powerlevel9k
+zsh-users/zsh-autosuggestions
+joel-porquet/zsh-dircolors-solarized
+b4b4r07/enhancd
+zsh-users/zsh-completions
+DylanRJohnston/gitfast-zsh-plugin
+leonhartX/docker-machine-zsh-completion
