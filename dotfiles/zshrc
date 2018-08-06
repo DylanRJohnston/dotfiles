@@ -1,0 +1,164 @@
+source <(antibody init)
+source <(gdircolors ~/.dircolors)
+
+unsetopt correct_all
+
+antibody bundle < ~/.zsh_antibody_plugins.txt
+
+alias ls="gls --color"
+alias sl=ls
+alias ll="ls -l"
+alias la="ls -la"
+alias v=vagrant
+alias ffmpeg="ffmpeg -hide_banner"
+alias leaving-work="diskutil unmountDisk 'Time Machine'"
+alias gitlog="git log --oneline --graph --decorate --branches='*'"
+alias gitclear="git reflog expire --expire=now --all && git gc --prune=now --aggressive"
+alias vim-update-packages=vim +BundleInstall +BundleClearn +q
+alias docker-nuke="docker ps --all | tail -n+2 | grep -oE '^[^  ]+' | xargs -I % bash -c 'docker kill %; docker rm %'"
+
+flix () { peerflix --vlc $(pbpaste) }
+
+ffmepg-convert () {
+    ffmpeg -i $1 -c:v libx264 -c:a copy ${1%%.mkv}-converted.mkv
+}
+
+start-gpg-agent () {
+    /usr/local/bin/gpg-agent >/dev/null 2>&1
+    export GPG_TTY=$(tty)
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+}
+
+man () {
+    export LESS_TERMCAP_mb=$(printf "\e[01;31m")
+    export LESS_TERMCAP_md=$(printf "\e[01;31m")
+    export LESS_TERMCAP_me=$(printf "\e[0m")
+    export LESS_TERMCAP_se=$(printf "\e[0m")
+    export LESS_TERMCAP_so=$(printf "\e[01;44;33m")
+    export LESS_TERMCAP_ue=$(printf "\e[0m")
+    export LESS_TERMCAP_us=$(printf "\e[01;32m")
+    env man $@
+}
+
+decrypt-wrapper () {
+    echo $1 | sed -E 's/^ +(.*)/\1/' | gpg --batch --decrypt
+}
+
+free () {
+    vm_stat | perl -ne '/page size of (\d+)/ and $size=$1; /Pages\s+([^:]+)[^\d]+(\d+)/ and printf("%-16s % 16.2f Mi\n", "$1:", $2 * $size / 1048576);'
+}
+
+where () {
+    ll $(which -a $@)
+}
+
+tellme () {
+    eval "$@" && say done || say failed
+}
+
+decrypt_audible () {
+    local INPUT_FILE="$1"
+    local COVER_IMAGE_TEMP="$(mktemp).jpg"
+    local AUDIO_BOOK_TEMP="$(mktemp).m4a"
+
+    local ACTIVATION_BYTES="$(decrypt-wrapper 2>/dev/null "
+        -----BEGIN PGP MESSAGE-----
+        Version: GnuPG v2
+
+        hQIMA3X6OWk9Plj9AQ//U79zuiW1oJ0YanbAEZ9hRXJ7iBidrPzZuFM/kvnbq+0U
+        CCy7OtMU4iYX1rx1jRfA3hCK53aDPpMhfFeVgQTNICpwbOQ9QJumfMPhKRnqs7ay
+        le/RvH2giHWccQMF8u3f5Uef9B74iklbW5Y5ufrAyMj5ROukttlsEq1oSWZhC4qy
+        zqlHXMk2x1O2uJ23S1DrRGb21H4bZiUG5FByHTQO2PAE6+kkl3vDH9Prw4p9EwEf
+        oIY9/tR1gB4p4O+b6TtnMdHeT8D+7055Pfn6JbC42DNfdcvrrmtmJD9iAzTzES0h
+        b3K5MNebg7eIbfEK2jMtkGAsQWIfGVxvpZfJiq0RbHVx/l2Be7g4aCU1RCjJ44Dz
+        +60BQx02SdvWxGJN5Fyx1vBIIqe398H5HdS9xh03Pm1RucmX2Z5QUGlmvtbAaoip
+        hBJcx2e7QF+Qwij6xNCCBZ4f49e2yjpYs2gcBdWJYKwVzDY8auJ7H/BFTwGJWlcZ
+        esBW6Wk8/PrR1GcvZs+1KmnIFta/DHKaQYRBCCYQ5i1ubtPYZZ9uGygUSgOp4Iq6
+        ud1LwHOYeceyDzgKTQ93AaiVFZ490mh1wXIhCpIsL/N/8YFFDV/SHUi5w2ZilVac
+        T5ILMRylmIuQ3Q6hHms7hzoLIPHCkmoqVxRDNTKYB33HS5Zjg9rJjptncrhzSu7S
+        QwGz5dAFOVz5XommVGeCBlZ7Dz85yRUAlqG3tqGZUYyY6i9FGIBnwl9pMBwIqzDE
+        o51D2jJPWZZ9LOZH0cID7qRtgfo=
+        =SU37
+        -----END PGP MESSAGE-----
+        "
+    )"
+
+    ffmpeg -y -i "$INPUT_FILE" "$COVER_IMAGE_TEMP"
+    ffmpeg -y -activation_bytes "$ACTIVATION_BYTES" -i "$INPUT_FILE" -vn -c:a copy "$AUDIO_BOOK_TEMP"
+    mp4art --add "$COVER_IMAGE_TEMP" "$AUDIO_BOOK_TEMP"
+    mv "$AUDIO_BOOK_TEMP" "${INPUT_FILE%%.aax}.m4a"
+}
+
+(/usr/local/bin/gpg-agent &>/dev/null &)
+
+export PATH=./node_modules/.bin:$HOME/.local/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+export HOMEBREW_MAKE_JOBS=$(sysctl -n hw.logicalcpu)
+
+export SSH_AUTH_SOCK=/Users/dylanj/.gnupg/S.gpg-agent.ssh
+export GPG_TTY=$(tty)
+
+export ENHANCD_FILTER=fzf
+export ENHANCD_DOT_SHOW_FULLPATH=1
+export ENHANCD_DISABLE_DOT=1
+export POWERLEVEL9K_PROMPT_ON_NEWLINE=1
+export POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+export POWERLEVEL9K_SHORTEN_DELIMITER=""
+export POWERLEVEL9K_SHORTEN_STRATEGY=truncate_from_right
+export POWERLEVEL9K_STATUS_OK=false
+export POWERLEVEL9K_SHOW_CHANGESET=true
+export POWERLEVEL9K_HIDE_BRANCH_ICON=true
+export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+export POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time)
+
+zstyle ':completion:*:*:*:*:*' menu select
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+setopt PROMPT_SUBST
+setopt CORRECT
+setopt COMPLETE_IN_WORD
+
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_DUPS
+setopt HIST_VERIFY
+setopt HIST_EXPIRE_DUPS_FIRST
+
+[[ -v HOMEBREW_GITHUB_API_TOKEN ]] || export HOMEBREW_GITHUB_API_TOKEN="$(decrypt-wrapper 2>/dev/null "
+    -----BEGIN PGP MESSAGE-----
+    Version: GnuPG v2
+
+    hQIMA3X6OWk9Plj9AQ//fKG/avgnLSdkiNfLDjSQ073Befw9+SPrMy87WkLteMfs
+    MLRGSoYOCu1zoaP067aAi20XT1v+SVyBbKdZGbWuzwjWnaQwNzDp6dd9Xa0S8IWQ
+    oWfLgOUyBgtPP2++CxQU6o7YfmYv4QzX0nDaZ5O/1OpkNZVkVQnv64LTB89QtvXm
+    EVdqWMVCe79K+eq50zWgSQlBBCiySmIuz3V3rfyNDkmvTBwbsvF/FXx9cb7BZCaX
+    AOfTnL1zOwzle5a66ffsBBPuAL3Gpfmg3+A/8r0Ey3JpTsAqqwSAphd7uw7sSZzE
+    K9TXwT7IEHClkQJeV3bswGC9wy4LbKuwW87DXMBND022zIgpZkyRA+Zfkw14FAZR
+    icKlc3mYFkcs0cmXlYdSj68YRFKV3z5RabSfakcJjdPqSFBbhigOQUTAeDcr+Fq3
+    LA6iX6xxuOzVgJPtIYXY77viWaLItCdKkePhxZl3x5UYAnzGNimvt+t85NTrKFcJ
+    LfJoeDyPEKUcwF1zNA0FDK9sQ8ydhKZqsA7Ru9t0+9o2jRf/0bswULAWGlbYFhlV
+    dYCjcBHKM4Vlm1f6d6YMqjmj5tTaJ0e4XBDoqDPk2190SAE/wgr4vCx86qBnF2OQ
+    MdjGLHxu+Z3rmaGzERuYG6X352dj2aSl0HweUZKXRQn+eQRBwqZVkFDk51mgI87S
+    YwF536I8525Fy3v9x4HkjPek9eXCcz1zSHxST3Hrm0YG0rWWOL0QtqOjywtH2/aa
+    zFvYr0dpKD697GK9CBwCeomMgLg5PoaN2pKBy4/a/+16FXs9dxQkqOHerkexWtm7
+    m6QTRQ==
+    =XTRU
+    -----END PGP MESSAGE-----
+    "
+)"
+
+
+[ -s "/Users/dylanj/.scm_breeze/scm_breeze.sh" ] && source "/Users/dylanj/.scm_breeze/scm_breeze.sh"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/dylanj/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/dylanj/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/dylanj/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/dylanj/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh
