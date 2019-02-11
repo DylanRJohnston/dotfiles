@@ -16,6 +16,7 @@ alias gitlog="git log --oneline --graph --decorate --branches='*'"
 alias gitclear="git reflog expire --expire=now --all && git gc --prune=now --aggressive"
 alias vim-update-packages=vim +BundleInstall +BundleClearn +q
 alias docker-nuke="docker ps --all | tail -n+2 | grep -oE '^[^  ]+' | xargs -I % bash -c 'docker kill %; docker rm %'"
+alias localstack="(cd ~/Workspace/github/localstack && TMPDIR=/private$TMPDIR docker-compose up)"
 
 flix () { peerflix --vlc $(pbpaste) }
 
