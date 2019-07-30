@@ -1,7 +1,12 @@
+alias dircolors=gdircolors
+
 source <(antibody init)
 source <(gdircolors ~/.dircolors)
 
 unsetopt correct_all
+
+autoload -Uz compinit
+compinit
 
 antibody bundle < ~/.zsh_antibody_plugins.txt
 
@@ -25,7 +30,7 @@ ffmepg-convert () {
 }
 
 start-gpg-agent () {
-    /usr/local/bin/gpg-agent >/dev/null 2>&1
+    /usr/local/bin/gpg-agent &>/dev/null
     export GPG_TTY=$(tty)
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 }
@@ -90,14 +95,10 @@ decrypt_audible () {
     mv "$AUDIO_BOOK_TEMP" "${INPUT_FILE%%.aax}.m4a"
 }
 
-(/usr/local/bin/gpg-agent &>/dev/null &)
 
-export PATH=./node_modules/.bin:$HOME/.local/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+export PATH=$HOME/Workspace/personal/scripts:./node_modules/.bin:$HOME/.local/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export HOMEBREW_MAKE_JOBS=$(sysctl -n hw.logicalcpu)
 export GOPATH=/Users/dylanj/Workspace/go
-
-export SSH_AUTH_SOCK=/Users/dylanj/.gnupg/S.gpg-agent.ssh
-export GPG_TTY=$(tty)
 
 export ENHANCD_FILTER=fzf
 export ENHANCD_DOT_SHOW_FULLPATH=1
@@ -155,12 +156,6 @@ setopt HIST_EXPIRE_DUPS_FIRST
     "
 )"
 
+start-gpg-agent
 
 [ -s "/Users/dylanj/.scm_breeze/scm_breeze.sh" ] && source "/Users/dylanj/.scm_breeze/scm_breeze.sh"
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/dylanj/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/dylanj/.config/yarn/global/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/dylanj/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/dylanj/.config/yarn/global/node_modules/tabtab/.completions/sls.zsh

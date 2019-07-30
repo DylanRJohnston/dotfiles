@@ -60,7 +60,7 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 defaults write com.apple.dock autohide -bool true
 
 # Enable scroll gesture (with modifier) to zoom
-defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+##  defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 
 # Disable sounds effects for user interface changes
 defaults write com.apple.systemsound com.apple.sound.uiaudio.enabled -int 0
