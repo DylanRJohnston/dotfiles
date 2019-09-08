@@ -92,7 +92,7 @@ decrypt_audible () {
 
 (/usr/local/bin/gpg-agent &>/dev/null &)
 
-export PATH=./node_modules/.bin:$HOME/.local/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
+export PATH=$HOME/.cargo/bin:./node_modules/.bin:$HOME/.local/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export HOMEBREW_MAKE_JOBS=$(sysctl -n hw.logicalcpu)
 export GOPATH=/Users/dylanj/Workspace/go
 

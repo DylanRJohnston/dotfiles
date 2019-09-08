@@ -10,6 +10,16 @@
 	wdiff = diff --color-words
 	fh = log --graph --pretty=\"format:%Cred%h%C(yellow)%d%Creset ... %s %Cgreen(%ar by %an)%Creset\"
 	h = "!f() { TARGET=HEAD; [ -z \"${1##*[!0-9]*}\" ] && TARGET=$1 && shift; git fh $TARGET | head -${1:-10} ;}; f"
+	append = town append
+	hack = town hack
+	kill = town kill
+	new-pull-request = town new-pull-request
+	prepend = town prepend
+	prune-branches = town prune-branches
+	rename-branch = town rename-branch
+	repo = town repo
+	ship = town ship
+	sync = town sync
 [merge]
 	tool = vimdiff
 [mergetool]
