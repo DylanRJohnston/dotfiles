@@ -11,9 +11,10 @@ set -o errexit
 
 DIR="$(cd "$(dirname "$0")"; pwd)"
 IFS=$'\n'
-FILES=( $(<dotfiles/DOTFILES) )
+FILES=( $(ls -1 "${DIR}/dotfiles") )
 # echo "${DIR}"
-for FILE in ${FILES[@]}; do
+for FILE in "${FILES[@]}"; do
+    echo "Installing ${FILE}"
     FILE_PATH="${HOME}/.$FILE"
     mkdir -p "$(dirname $FILE_PATH)" || true
     ln -sf "${DIR}/dotfiles/${FILE}" "${FILE_PATH}"
