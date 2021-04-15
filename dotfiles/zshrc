@@ -1,5 +1,8 @@
 if [ "$(uname)" = "Linux" ]; then
     alias ls="ls --color"
+    /usr/bin/keychain -q --nogui $HOME/.ssh/id_rsa
+    source $HOME/.keychain/DESKTOP-sh
+    source ~/workspace/github/enhancd/init.sh
 else
     export HOMEBREW_MAKE_JOBS=$(sysctl -n hw.logicalcpu)
     
@@ -127,9 +130,9 @@ decrypt_audible () {
     mv "$AUDIO_BOOK_TEMP" "${INPUT_FILE%%.aax}.m4a"
 }
 
-
-export PATH=$HOME/.cargo/bin:./node_modules/.bin:$HOME/.local/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
-export GOPATH=/Users/dylanj/Workspace/go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/workspace/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.cargo/bin:./node_modules/.bin:$HOME/.local/bin:$HOME/.config/yarn/global/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$PATH
 
 export ENHANCD_FILTER=fzf
 export ENHANCD_DOT_SHOW_FULLPATH=1
